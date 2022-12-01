@@ -22,7 +22,7 @@ onstart:
 
 rule targets:
     input:
-        directory("Struo2"),
+        "Struo2/Snakefile",
         # GTDB-Kraken2,
         # GTDB-Centrifuge,
         # GTDB-KMCP,
@@ -35,7 +35,8 @@ rule targets:
 ### Prepare ###
 rule getStruo2:
     output:
-        directory("Struo2")
+        directory("Struo2"),
+        "Struo2/Snakefile"
     conda:
         "env/struo2.yaml"
     threads:8
