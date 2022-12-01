@@ -49,34 +49,34 @@ rule getStruo2:
         git submodule update --remote --init --recursive;
         """
 
-rule getGTDBGenomes:
+# rule getGTDBGenomes:
 
-rule getGTDBArchTax:
+# rule getGTDBArchTax:
 
-rule getGTDBBactTax:
+# rule getGTDBBactTax:
 
-rule prepGTDBGenomes:
+# rule prepGTDBGenomes:
 
-rule prepGTDBTaxonomy:
+# rule prepGTDBTaxonomy:
 
-rule taxdumpGTDB:
+# rule taxdumpGTDB:
 
 
 
-rule buildKraken2:
+# rule buildKraken2:
 
-rule buildBraken:
+# rule buildBraken:
 
-rule buildKCMP:
+# rule buildKCMP:
 
-rule buildCentrifuge:
+# rule buildCentrifuge:
 
-rule buildGanon:
+# rule buildGanon:
 
-### Humann3 DBs ###
+# ### Humann3 DBs ###
 
-rule buildHumann3:
+# rule buildHumann3:
 
-rule buildKraken2:
+
 
 
