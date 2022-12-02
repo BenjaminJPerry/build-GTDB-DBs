@@ -25,7 +25,10 @@ onstart:
 rule targets:
     input:
         'Struo2/Snakefile',
-        'GTDB/gtdb_genomes_reps_latest.tar.gz'
+        'GTDB/gtdb_genomes_reps_latest.tar.gz',
+        'GTDB/bac120_taxonomy_latest.tsv',
+        'GTDB/ar53_taxonomy_latest.tsv',
+        'GTDB/taxid.map'
         # GTDB-Kraken2,
         # GTDB-Centrifuge,
         # GTDB-KMCP,
@@ -121,7 +124,7 @@ rule taxdumpGTDB:
     conda:
         'env/taxkit.yaml'
     message:
-        'Creating tax dump files...'
+        'Creating taxdump files...'
     threads: 2
     shell:
         '''

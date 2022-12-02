@@ -1,0 +1,9 @@
+name: /home/perrybe/conda-envs/taxonkit
+channels:
+  - r
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - taxonkit=0.13.0=h9ee0642_0
+prefix: /home/perrybe/conda-envs/taxonkit
