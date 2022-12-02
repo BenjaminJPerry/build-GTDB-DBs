@@ -1,3 +1,13 @@
-gtdb-genomes:
-gtdb-arch-taxonomy:
-gtdb-bact-taxonomy:
+# Configuration file for building GTDB based taxonomic and functional databases
+
+# archive of representative genomes
+gtdb-genomes: https://data.ace.uq.edu.au/public/gtdb/data/releases/release207/207.0/genomic_files_reps/gtdb_genomes_reps_r207.tar.gz
+
+# taxonomic summary files
+gtdb-bac-tax: https://data.ace.uq.edu.au/public/gtdb/data/releases/release207/207.0/bac120_taxonomy_r207.tsv.gz
+gtdb-arc-tax: https://data.ace.uq.edu.au/public/gtdb/data/releases/release207/207.0/ar53_taxonomy_r207.tsv.gz
+
+# genome metadata for filtering accessions
+gtdb-bac-metadata: https://data.ace.uq.edu.au/public/gtdb/data/releases/release207/207.0/bac120_metadata_r207.tar.gz
+gtdb-arc-metadata: https://data.ace.uq.edu.au/public/gtdb/data/releases/release207/207.0/ar53_metadata_r207.tar.gz
+
