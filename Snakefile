@@ -70,7 +70,7 @@ rule getGTDBGenomes:
         gtdb-genomes=config['gtdb-genomes']
     shell:
         '''
-        wget -O {output.gtdb-tar} {params.gtdb-genomes};
+        wget -O {output.gtdbTar} {params.gtdb-genomes};
         '''
 
 
