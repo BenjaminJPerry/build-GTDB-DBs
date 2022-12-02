@@ -55,7 +55,7 @@ rule getStruo2:
         git clone https://github.com/leylabmpi/Struo2.git;
         cd Struo2;
         git submodule update --remote --init --recursive;
-        ''''
+        '''
 
 
 
