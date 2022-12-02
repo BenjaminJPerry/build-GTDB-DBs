@@ -67,46 +67,46 @@ rule getGTDBGenomes:
     message:
         'Downloading GTDB release: '
     params:
-        gtdb-genomes=config['gtdb-genomes']
+        gtdbGenomes=config['gtdb-genomes']
     shell:
         '''
-        wget -O {output.gtdbTar} {params.gtdb-genomes};
+        wget -O {output.gtdbTar} {params.gtdbGenomes};
         '''
 
 
 
 rule getGTDBBacTax:
     output:
-        bac-tax = 'GTDB/bac120_taxonomy_latest.tsv'
+        bacTax='GTDB/bac120_taxonomy_latest.tsv'
     conda:
         'env/struo2.yaml'
     message:
         'Downloading GTDB bacterial taxonomy...'
     threads: 2
     params:
-        gtdb-bac-tax = config['gtdb-bac-tax']
+        gtdbBacTax=config['gtdb-bac-tax']
     shell:
         '''
-        wget -O GTDB/bac120_taxonomy_latest.tsv.gz {params.gtdb-bac-tax};
-        gunzip -c GTDB/bac120_taxonomy_latest.tsv.gz > {output.bac-tax};
+        wget -O GTDB/bac120_taxonomy_latest.tsv.gz {params.gtdbBacTax};
+        gunzip -c GTDB/bac120_taxonomy_latest.tsv.gz > {output.bacTax};
         '''
 
 
 
 rule getGTDBArcTax:
     output:
-        arc-tax = 'GTDB/ar53_taxonomy_latest.tsv'
+        arcTax='GTDB/ar53_taxonomy_latest.tsv'
     conda:
         'env/struo2.yaml'
     message:
         'Downloading GTDB archaeal taxonomy...'
     threads: 2
     params:
-        gtdb-bac-tax = config['gtdb-arc-tax']
+        gtdbArcTax = config['gtdb-arc-tax']
     shell:
         '''
-        wget -O GTDB/ar53_taxonomy_latest.tsv.gz {params.gtdb-arc-tax};
-        gunzip -c GTDB/ar53_taxonomy_latest.tsv.gz > {output.arc-tax};
+        wget -O GTDB/ar53_taxonomy_latest.tsv.gz {params.gtdbArcTax};
+        gunzip -c GTDB/ar53_taxonomy_latest.tsv.gz > {output.arcTax};
         '''
 
 
