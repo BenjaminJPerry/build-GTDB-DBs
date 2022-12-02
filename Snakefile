@@ -3,22 +3,22 @@
 # Maintainer: Benjamin J Perry
 # Email: ben.perry@agresearch.co.nz
 
-configfile: 'config/config.yaml'
+configfile: "config/config.yaml"
 
 import os
 
 onstart:
-    print(f'Working directory: {os.getcwd()}')
+    print(f"Working directory: {os.getcwd()}")
 
-    print('TOOLS: ')
-    os.system("echo '  bash: $(which bash)'")
-    os.system("echo '  PYTHON: $(which python)'")
-    os.system("echo '  CONDA: $(which conda)'")
-    os.system("echo '  SNAKEMAKE: $(which snakemake)'")
+    print("TOOLS: ")
+    os.system('echo "  bash: $(which bash)"')
+    os.system('echo "  PYTHON: $(which python)"')
+    os.system('echo "  CONDA: $(which conda)"')
+    os.system('echo "  SNAKEMAKE: $(which snakemake)"')
     print(f"Env TMPDIR = {os.environ.get('TMPDIR', '<n/a>')}")
 
-    os.system("echo '  PYTHON VERSION: $(python --version)'")
-    os.system("echo '  CONDA VERSION: $(conda --version)'")
+    os.system('echo "  PYTHON VERSION: $(python --version)"')
+    os.system('echo "  CONDA VERSION: $(conda --version)"')
 
 
 
