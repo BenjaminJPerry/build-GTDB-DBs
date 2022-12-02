@@ -61,13 +61,13 @@ rule getStruo2:
 
 rule getGTDBGenomes:
     output:
-        gtdb-tar = 'GTDB/gtdb_genomes_reps_latest.tar.gz'
+        gtdbTar='GTDB/gtdb_genomes_reps_latest.tar.gz'
     conda:
         'env/struo2.yaml'
     message:
         'Downloading GTDB release: '
     params:
-        gtdb-genomes = config['gtdb-genomes']
+        gtdb-genomes=config['gtdb-genomes']
     shell:
         '''
         wget -O {output.gtdb-tar} {params.gtdb-genomes};
