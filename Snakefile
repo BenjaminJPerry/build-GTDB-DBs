@@ -116,11 +116,11 @@ rule taxdumpGTDB:
         bac = rules.getGTDBBacTax.output.bacTax,
         arc = rules.getGTDBArcTax.output.arcTax
     output:
-        'GTDB/taxid.map',
-        'GTDB/nodes.dmp',
-        'GTDB/names.dmp',
-        'GTDB/merged.dmp',
-        'GTDB/delnodes.dmp',
+        'taxdump/taxid.map',
+        'taxdump/nodes.dmp',
+        'taxdump/names.dmp',
+        'taxdump/merged.dmp',
+        'taxdump/delnodes.dmp',
     conda:
         'taxonkit'
     message:
@@ -128,7 +128,7 @@ rule taxdumpGTDB:
     threads: 2
     shell:
         '''
-        taxonkit create-taxdump {input.bac} {input.arc} --gtdb --out-dir GTDB/ --force;
+        taxonkit create-taxdump {input.bac} {input.arc} --gtdb --out-dir taxdump --force;
         '''
 
 
