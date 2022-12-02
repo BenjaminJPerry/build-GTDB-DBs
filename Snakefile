@@ -113,8 +113,8 @@ rule getGTDBArcTax:
 
 rule taxdumpGTDB:
     input:
-        bac = rules.getGTDBBacTax.output.bac-tax,
-        arc = rules.getGTDBArcTax.output.arc-tax
+        bac = rules.getGTDBBacTax.output.bacTax,
+        arc = rules.getGTDBArcTax.output.arcTax
     output:
         'GTDB/taxid.map',
         'GTDB/nodes.dmp',
