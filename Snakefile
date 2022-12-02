@@ -46,7 +46,7 @@ rule getStruo2:
         directory('Struo2'),
         'Struo2/Snakefile'
     conda:
-        'env/struo2.yaml'
+        'struo2'
     threads:8
     message:
         'Cloning Struo2 repository: https://github.com/leylabmpi/Struo2.git...'
@@ -63,7 +63,7 @@ rule getGTDBGenomes:
     output:
         gtdbTar='GTDB/gtdb_genomes_reps_latest.tar.gz'
     conda:
-        'env/struo2.yaml'
+        'struo2'
     message:
         'Downloading GTDB release: '
     params:
@@ -79,7 +79,7 @@ rule getGTDBBacTax:
     output:
         bacTax='GTDB/bac120_taxonomy_latest.tsv'
     conda:
-        'env/struo2.yaml'
+        'struo2'
     message:
         'Downloading GTDB bacterial taxonomy...'
     threads: 2
@@ -97,7 +97,7 @@ rule getGTDBArcTax:
     output:
         arcTax='GTDB/ar53_taxonomy_latest.tsv'
     conda:
-        'env/struo2.yaml'
+        'struo2'
     message:
         'Downloading GTDB archaeal taxonomy...'
     threads: 2
@@ -122,7 +122,7 @@ rule taxdumpGTDB:
         'GTDB/merged.dmp',
         'GTDB/delnodes.dmp',
     conda:
-        'env/taxonkit.yaml'
+        'taxonkit'
     message:
         'Creating taxdump files...'
     threads: 2
