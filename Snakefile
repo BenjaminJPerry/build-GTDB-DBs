@@ -122,7 +122,7 @@ rule taxdumpGTDB:
         'GTDB/merged.dmp',
         'GTDB/delnodes.dmp',
     conda:
-        'env/taxkit.yaml'
+        'env/taxonkit.yaml'
     message:
         'Creating taxdump files...'
     threads: 2
