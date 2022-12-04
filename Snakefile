@@ -28,7 +28,8 @@ rule targets:
         'GTDB/gtdb_genomes_reps_latest.tar.gz',
         'GTDB/bac120_taxonomy_latest.tsv',
         'GTDB/ar53_taxonomy_latest.tsv',
-        'taxdump/taxid.map'
+        'taxdump/taxid.map',
+        'Struo2/data/UniRef90/UniRef90_mmseqs.tar.gz'
         # GTDB-Kraken2,
         # GTDB-Centrifuge,
         # GTDB-KMCP,
