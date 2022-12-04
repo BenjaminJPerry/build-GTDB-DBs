@@ -11,3 +11,5 @@ gtdb-arc-tax: https://data.ace.uq.edu.au/public/gtdb/data/releases/release207/20
 gtdb-bac-metadata: https://data.ace.uq.edu.au/public/gtdb/data/releases/release207/207.0/bac120_metadata_r207.tar.gz
 gtdb-arc-metadata: https://data.ace.uq.edu.au/public/gtdb/data/releases/release207/207.0/ar53_metadata_r207.tar.gz
 
+# Struo2 release of UniRef90 data
+struo2-uniref90: http://ftp.tue.mpg.de/ebio/projects/struo2/install/uniref_2019.01/UniRef90_mmseqs.tar.gz

@@ -59,6 +59,24 @@ rule getStruo2:
 
 
 
+rule getUniRef90Struo2:
+    output:
+        uniref90tar='Struo2/data/UniRef90/UniRef90_mmseqs.tar.gz'
+    conda:
+        'struo2'
+    threads:2
+    message:
+        'Downloading Struo2 Uniref90 DB...'
+    params:
+        uniref90=config['struo2-uniref90']
+    shell:
+        '''
+        wget -O {output.uniref90tar} {params.uniref90};
+        '''
+    
+
+
+
 rule getGTDBGenomes:
     output:
         gtdbTar='GTDB/gtdb_genomes_reps_latest.tar.gz'
