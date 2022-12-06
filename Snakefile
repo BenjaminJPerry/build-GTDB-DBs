@@ -79,7 +79,6 @@ rule getUniRef90Struo2:
 rule untarUniref90:
     output:
         uniref90='Struo2/data/UniRef90/uniref90',
-        uniref90dir=directory('Struo2/data/UniRef90')
     input:
         rules.getUniRef90Struo2.output.uniref90tar
     conda:
@@ -88,7 +87,7 @@ rule untarUniref90:
     message: 'Unpacking Struo2/data/UniRef90_mmseqs.tar.gz...'
     shell:
         '''
-        tar -pzxvf {input} --directory Struo2/data/UniRef90
+        tar -pzxvf {input} --directory Struo2/data
         '''
 
 
