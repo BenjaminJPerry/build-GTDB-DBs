@@ -179,28 +179,10 @@ rule taxdumpGTDB:
 
 
 
-rule prepGTDBGenomes:
-
-
-
-# rule prepGTDBTaxonomy:
-
-
-
-# rule buildKraken2:
-
-# rule buildBraken:
+# rule prepGTDBGenomes:
 
 # rule buildKCMP:
 
 # rule buildCentrifuge:
 
 # rule buildGanon:
-
-# ### Humann3 DBs ###
-
-# rule buildHumann3:
-
-
-
-
