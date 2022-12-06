@@ -29,7 +29,7 @@ rule targets:
         'GTDB/bac120_taxonomy_latest.tsv',
         'GTDB/ar53_taxonomy_latest.tsv',
         'taxdump/taxid.map',
-        'Struo2/data/UniRef90/UniRef90_mmseqs.tar.gz'
+        'Struo2/data/UniRef90/UniRef90/uniref90'
         # GTDB-Kraken2,
         # GTDB-Centrifuge,
         # GTDB-KMCP,
@@ -73,8 +73,25 @@ rule getUniRef90Struo2:
     shell:
         '''
         wget -O {output.uniref90tar} {params.uniref90};
+        '''    
+
+
+
+rule untarUniref90:
+    output:
+        uniref90='Struo2/data/UniRef90/UniRef90/uniref90',
+        uniref90dir=directory('Struo2/data/UniRef90/UniRef90')
+    input:
+        rules.getUniRef90Struo2.output.uniref90tar
+    conda:
+        'struo2'
+    threads: 2
+    message: 'Unpacking Struo2/data/UniRef90/UniRef90_mmseqs.tar.gz...'
+    shell:
         '''
-    
+        tar -pzxvf {input} --directory Struo2/data/UniRef90
+
+        '''
 
 
 
