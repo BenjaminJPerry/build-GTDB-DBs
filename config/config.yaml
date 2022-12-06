@@ -13,3 +13,7 @@ gtdb-arc-metadata: https://data.ace.uq.edu.au/public/gtdb/data/releases/release2
 
 # Struo2 release of UniRef90 data
 struo2-uniref90: http://ftp.tue.mpg.de/ebio/projects/struo2/install/uniref_2019.01/UniRef90_mmseqs.tar.gz
+
+# Struo2 release of Uniref50 to Uniref90 mapping
+struo2-uniref-mapping: http://ftp.tue.mpg.de/ebio/projects/struo2/install/uniref_2019.01/uniref50-90.pkl
+

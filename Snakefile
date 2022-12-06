@@ -29,7 +29,8 @@ rule targets:
         'GTDB/bac120_taxonomy_latest.tsv',
         'GTDB/ar53_taxonomy_latest.tsv',
         'taxdump/taxid.map',
-        'Struo2/data/UniRef90/UniRef90/uniref90'
+        'Struo2/data/UniRef90/UniRef90/uniref90',
+        'Struo2/data/UniRef90/uniref50-90.pkl',
         # GTDB-Kraken2,
         # GTDB-Centrifuge,
         # GTDB-KMCP,
@@ -49,8 +50,7 @@ rule getStruo2:
     conda:
         'struo2'
     threads:8
-    message:
-        'Cloning Struo2 repository: https://github.com/leylabmpi/Struo2.git...'
+    message: 'Cloning Struo2 repository: https://github.com/leylabmpi/Struo2.git...'
     shell:
         '''
         git clone https://github.com/leylabmpi/Struo2.git;
@@ -66,8 +66,7 @@ rule getUniRef90Struo2:
     conda:
         'struo2'
     threads:2
-    message:
-        'Downloading Struo2 Uniref90 DB...'
+    message: 'Downloading Struo2 Uniref90 DB...'
     params:
         uniref90=config['struo2-uniref90']
     shell:
@@ -90,7 +89,22 @@ rule untarUniref90:
     shell:
         '''
         tar -pzxvf {input} --directory Struo2/data/UniRef90
+        '''
 
+
+
+rule getUnirefMapping:
+    output:
+        unirefMap='Struo2/data/UniRef90/uniref50-90.pkl'
+    conda:
+        'struo2'
+    threads: 2
+    message: 'Downloading Struo2 UniRef mapping pkl...'
+    params:
+        unirefPkl=config['struo2-uniref-mapping']
+    shell:
+        '''
+        wget -O {output.unirefMap} {params.unirefPkl}
         '''
 
 
@@ -100,8 +114,7 @@ rule getGTDBGenomes:
         gtdbTar='GTDB/gtdb_genomes_reps_latest.tar.gz'
     conda:
         'struo2'
-    message:
-        'Downloading GTDB release: '
+    message: 'Downloading GTDB release: '
     params:
         gtdbGenomes=config['gtdb-genomes']
     shell:
@@ -116,8 +129,7 @@ rule getGTDBBacTax:
         bacTax='GTDB/bac120_taxonomy_latest.tsv'
     conda:
         'struo2'
-    message:
-        'Downloading GTDB bacterial taxonomy...'
+    message: 'Downloading GTDB bacterial taxonomy...'
     threads: 2
     params:
         gtdbBacTax=config['gtdb-bac-tax']
@@ -134,8 +146,7 @@ rule getGTDBArcTax:
         arcTax='GTDB/ar53_taxonomy_latest.tsv'
     conda:
         'struo2'
-    message:
-        'Downloading GTDB archaeal taxonomy...'
+    message: 'Downloading GTDB archaeal taxonomy...'
     threads: 2
     params:
         gtdbArcTax = config['gtdb-arc-tax']
@@ -159,8 +170,7 @@ rule taxdumpGTDB:
         'taxdump/delnodes.dmp',
     conda:
         'taxonkit'
-    message:
-        'Creating taxdump files...'
+    message: 'Creating taxdump files...'
     threads: 2
     shell:
         '''
