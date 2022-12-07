@@ -1,0 +1,240 @@
+# cluster_config.yml - cluster configuration
+__default__:
+    account: perrybe
+    partition: inv-iranui, inv-iranui-fast
+    time: 12:00:00 # time limit for each job
+    threads: 16
+    output: ./slurm/%j.log
+    memory: 64000
+
+bracken_build:
+#    Build braken database(s) from kraken2 database.
+#    One database to user-selected read lengths.
+    partition: inv-bigmem
+    threads: 64
+    memory: 960000
+
+check_gene_info:
+#    Copying gene info to the output directory
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+copy_gene_info:
+#    Copying gene info to output directory
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+filter_gene_seqs:
+#    Filtering the amino acid gene sequences to just the vsearch cluster reps (nucleotide).
+#    Renaming as [seq_name]|gene_length|taxonomy
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+genes_combine_faa:
+#    For all per-genome de-replicated genes of all genomes, combining into 1 collection
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+genes_combine_fna:
+#    For all per-genome de-replicated genes of all genomes, combining into 1 collection
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+genes_combine_txt:
+#    For all per-genome de-replicated genes of all genomes, combining into 1 collection
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+humann3_alt_annotate:
+#    Re-annotating with different UniRef cluster resolution
+    time: 72:00:00
+    partition: inv-iranui
+    threads: 32
+    memory: 96000
+
+humann3_annotate_genes:
+#    Use search hits from clustered reps & index table to annotate all
+#    genome-derep genes. The annotation for each cluster rep is propagated
+#    to each member of the cluster.
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+humann3_annotate_genes_copy:
+#    Copying/compressing annotated gene files to the final directory
+
+humann3_annotate_hits_copy:
+#    Copying/compressing query hits (diamond or mmseqs) to the final output directory
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+humann3_batch_seqs:
+#    Splitting gene fasta for distributed searching (annotation)
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+humann3_bowtie2_build:
+#    Running bowtie2 build on combined, annotated genes (nucleotide)
+    partition: inv-bigmem
+    threads: 64
+    memory: 960000
+
+humann3_copy_input:
+#    Copying input to temp directory
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 2
+    memory: 4000
+
+humann3_diamond_makedb:
+#    Running diamond makedb on combined, annotated genes (amino acid)
+    partition: inv-bigmem
+    threads: 64
+    memory: 960000
+
+kraken2_add_taxID:
+#    Adding a taxononmy ID to the header of each genome.
+#    Assuming the taxID is in the samples table.
+#    Writing edited genome to temp dir.
+#    Format: `kraken:taxid|<taxID>|<seqID>`
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+kraken2_build:
+#    Building the kraken database
+    partition: inv-bigmem
+    threads: 64
+    memory: 960000
+
+kraken2_build_add:
+#    Adding genome fasta files to the kraken database.
+#    Using the --add-to-library flag
+
+kraken2_cp_dump:
+#    Copying names/nodes taxdump files to kraken2 db directory
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+kraken2_db_copy:
+#    Copying the kraken2 database to the output directory
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+kraken2_tmp_db_rm:
+#    Removing temporary kraken2 db directory
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 2
+    memory: 4000
+
+mmseqs_cluster:
+#    Clustering the mmseqs gene database
+
+mmseqs_cluster_membership:
+#    Getting a table of which genes belong to which cluster (cluster membership).
+#    Output table format: cluster_rep<tab>cluster_member
+#    The "cluster_rep" is the de-facto cluster_id
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+mmseqs_cluster_rep_db:
+#    Creating an mmseqs database of 1 representative for each cluster.
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+mmseqs_cluster_rep_seqs:
+#    Creating fasta flat file (amino acid) for representative sequence database
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 4
+    memory: 4000
+
+mmseqs_copy_db:
+#    Copying the database and cluster database to the output directory.
+
+mmseqs_db_create:
+#    Creating mmseqs2 database that will be used for clustering
+    time: 72:00:00
+    partition: inv-iranui
+    threads: 32
+    memory: 96000
+
+mmseqs_search:
+#    Running mmseqs search
+    time: 72:00:00
+    partition: inv-iranui
+    threads: 32
+    memory: 96000
+
+mmseqs_search_convertalis:
+#    Converting to blast m8 output format
+    time: 72:00:00
+    partition: inv-iranui
+    threads: 32
+    memory: 96000
+
+mmseqs_search_create_query_db:
+#    Creating mmseqs database for query sequences
+
+mmseqs_search_merge:
+#    Merging the results of all splits (all query hits)
+    partition: inv-iranui-fast
+    time: 02:00:00
+    threads: 2
+    memory: 4000
+
+mmseqs_search_target_db_copy:
+#    Copying target database (eg., mmseqs-formatted UniRef database) to temp directory
+    time: 72:00:00
+    partition: inv-iranui
+    threads: 32
+    memory: 96000
+
+mmseqs_search_target_db_idx_create:
+#    Copying target database index
+    time: 72:00:00
+    partition: inv-iranui
+    threads: 32
+    memory: 96000
+
+prodigal:
+#    For each genome, running prodigal to call genes
+    time: 72:00:00
+    partition: inv-iranui
+    threads: 32
+    memory: 96000
+
+vsearch_per_genome:
+#    For each genome, clustering genes (at nuc level) and taking the centroid.
+    time: 72:00:00
+    partition: inv-iranui
+    threads: 32
+    memory: 96000
+
