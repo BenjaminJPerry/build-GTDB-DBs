@@ -228,8 +228,8 @@ prodigal:
 #    For each genome, running prodigal to call genes
     time: 72:00:00
     partition: inv-iranui
-    threads: 32
-    memory: 96000
+    threads: 8
+    memory: 16000
 
 vsearch_per_genome:
 #    For each genome, clustering genes (at nuc level) and taking the centroid.
