@@ -1,7 +1,7 @@
 # cluster_config.yml - cluster configuration
 __default__:
     account: perrybe
-    partition: inv-iranui, inv-iranui-fast
+    partition: inv-iranui,inv-iranui-fast
     time: 12:00:00 # time limit for each job
     threads: 16
     output: ./slurm/%j.log
@@ -226,8 +226,8 @@ mmseqs_search_target_db_idx_create:
 
 prodigal:
 #    For each genome, running prodigal to call genes
-    time: 72:00:00
-    partition: inv-iranui
+    time: 02:00:00
+    partition: inv-iranui-fast
     threads: 8
     memory: 8000
 
