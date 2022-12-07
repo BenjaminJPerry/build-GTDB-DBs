@@ -229,7 +229,7 @@ prodigal:
     time: 72:00:00
     partition: inv-iranui
     threads: 8
-    memory: 16000
+    memory: 8000
 
 vsearch_per_genome:
 #    For each genome, clustering genes (at nuc level) and taking the centroid.
