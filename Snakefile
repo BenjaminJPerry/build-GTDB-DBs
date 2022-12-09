@@ -26,6 +26,8 @@ rule targets:
     input:
         'Struo2/Snakefile',
         'GTDB/gtdb_genomes_reps_latest.tar.gz',
+        'GTDB/bac120.metadata.tsv',
+        'GTDB/arc53.metadata.tsv',
         'GTDB/bac120_taxonomy_latest.tsv',
         'GTDB/ar53_taxonomy_latest.tsv',
         'taxdump/taxid.map',
@@ -123,6 +125,40 @@ rule getGTDBGenomes:
 
 
 
+rule getGTDBBacMetadata:
+    output:
+        bac120Metadata='GTDB/bac120.metadata.tsv'
+    conda:
+        'struo2'
+    message: 'Downloading bac120_metadata_r207.tar.gz...'
+    threads:2
+    params:
+        bacMeta=config['gtdb-bac-metadata']
+    shell:
+        '''
+        wget -O GTDB/bac120_metadata_r207.tar.gz {params.bacMeta};
+        gunzip -c GTDB/bac120_metadata_r207.tar.gz > {output.bac120Metadata}
+        '''
+
+
+
+rule getGTDBArcMetadata:
+    output:
+        arc53Metadata='GTDB/arc53.metadata.tsv'
+    conda:
+        'struo2'
+    message: 'Downloading ar53_metadata_r207.tar.gz...'
+    threads:2
+    params:
+        arcMeta=config['gtdb-arc-metadata']
+    shell:
+        '''
+        wget -O GTDB/ar53_metadata_r207.tar.gz {params.arcMeta};
+        gunzip -c GTDB/ar53_metadata_r207.tar.gz > {output.arc53Metadata}
+        '''
+
+
+
 rule getGTDBBacTax:
     output:
         bacTax='GTDB/bac120_taxonomy_latest.tsv'
@@ -178,7 +214,9 @@ rule taxdumpGTDB:
 
 
 
-# rule prepGTDBGenomes:
+rule prepGTDBGenomes:
+    output:
+        ''
 
 # rule buildKCMP:
 
