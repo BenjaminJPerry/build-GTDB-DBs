@@ -31,8 +31,8 @@ rule targets:
         'GTDB/bac120_taxonomy_latest.tsv',
         'GTDB/ar53_taxonomy_latest.tsv',
         'taxdump/taxid.map',
-        'Struo2/data/UniRef90/uniref90',
-        'Struo2/data/UniRef90/uniref50-90.pkl',
+        'Struo2-AgR-Tweaks/data/UniRef90/uniref90',
+        'Struo2-AgR-Tweaks/data/UniRef90/uniref50-90.pkl',
         # GTDB-Kraken2,
         # GTDB-Centrifuge,
         # GTDB-KMCP,
@@ -47,8 +47,8 @@ rule targets:
 ### Prepare ###
 rule getStruo2:
     output:
-        directory('Struo2'),
-        'Struo2/Snakefile'
+        directory('Struo2-AgR-Tweaks'),
+        'Struo2-AgR-Tweaks/Snakefile'
     conda:
         'struo2'
     threads: 2
@@ -64,7 +64,7 @@ rule getStruo2:
 
 rule getUniRef90Struo2:
     output:
-        uniref90tar='Struo2/data/UniRef90_mmseqs.tar.gz'
+        uniref90tar='Struo2-AgR-Tweaks/data/UniRef90_mmseqs.tar.gz'
     conda:
         'struo2'
     threads: 2
@@ -82,23 +82,23 @@ rule getUniRef90Struo2:
 
 rule untarUniref90:
     output:
-        uniref90='Struo2/data/UniRef90/uniref90',
+        uniref90='Struo2-AgR-Tweaks/data/UniRef90/uniref90',
     input:
         rules.getUniRef90Struo2.output.uniref90tar
     conda:
         'struo2'
     threads: 2
-    message: 'Unpacking Struo2/data/UniRef90_mmseqs.tar.gz...'
+    message: 'Unpacking Struo2-AgR-Tweaks/data/UniRef90_mmseqs.tar.gz...'
     shell:
         '''
-        tar -pzxvf {input} --directory Struo2/data
+        tar -pzxvf {input} --directory Struo2-AgR-Tweaks/data
         '''
 
 
 
 rule getUnirefMapping:
     output:
-        unirefMap='Struo2/data/UniRef90/uniref50-90.pkl'
+        unirefMap='Struo2-AgR-Tweaks/data/UniRef90/uniref50-90.pkl'
     conda:
         'struo2'
     threads: 2
