@@ -51,12 +51,12 @@ rule getStruo2:
         'Struo2/Snakefile'
     conda:
         'struo2'
-    threads:8
-    message: 'Cloning Struo2 repository: https://github.com/leylabmpi/Struo2.git...'
+    threads: 2
+    message: 'Cloning Struo2-AgR-Tweaks repository: https://github.com/BenjaminJPerry/Struo2-AgR-Tweaks.git...'
     shell:
         '''
-        git clone https://github.com/leylabmpi/Struo2.git;
-        cd Struo2;
+        git clone https://github.com/BenjaminJPerry/Struo2-AgR-Tweaks.git;
+        cd Struo2-AgR-Tweaks;
         git submodule update --remote --init --recursive;
         '''
 
@@ -67,7 +67,9 @@ rule getUniRef90Struo2:
         uniref90tar='Struo2/data/UniRef90_mmseqs.tar.gz'
     conda:
         'struo2'
-    threads:2
+    threads: 2
+    resources:
+        time = 2880 # minutes
     message: 'Downloading Struo2 Uniref90 DB...'
     params:
         uniref90=config['struo2-uniref90']
@@ -116,6 +118,9 @@ rule getGTDBGenomes:
     conda:
         'struo2'
     message: 'Downloading GTDB release: '
+    threads: 2
+    resources:
+        time = lambda wildcards, attempt: attempt * 4320 # minutes
     params:
         gtdbGenomes=config['gtdb-genomes']
     shell:
@@ -131,7 +136,7 @@ rule getGTDBBacMetadata:
     conda:
         'struo2'
     message: 'Downloading bac120_metadata_r207.tar.gz...'
-    threads:2
+    threads: 2
     params:
         bacMeta=config['gtdb-bac-metadata']
     shell:
@@ -217,7 +222,18 @@ rule taxdumpGTDB:
 rule prepGTDBGenomes:
     output:
         ''
+    conda:
+        'struo2'
+    message: 'Preparing GTDB genomes...'
+    threads: 2
+    resources:
+        time = lambda wildcards, attempt: attempt * 24 * 60 # hours * minutes
+    shell:
+        '''
+        mkdir -p GTDB/genomes
 
+        '''
+    
 # rule buildKCMP:
 
 # rule buildCentrifuge:
