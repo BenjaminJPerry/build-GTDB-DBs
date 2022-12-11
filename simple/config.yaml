@@ -14,7 +14,8 @@ default-resources:
   - partition=inv-iranui-fast,inv-iranui,inv-blade-g8-fast,inv-blade-g8,inv-bigmem-fast,inv-bigmem
   - qos=normal
   - time="02:00:00"
-  - mem="8G"
+  - mem_gb_pt="8G"
+  - threads=4
 restart-times: 5
 max-jobs-per-second: 10
 max-status-checks-per-second: 1
