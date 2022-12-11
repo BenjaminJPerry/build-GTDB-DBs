@@ -24,7 +24,7 @@ onstart:
 
 rule targets:
     input:
-        'Struo2/Snakefile',
+        'Struo2-AgR-Tweaks/Snakefile',
         'GTDB/gtdb_genomes_reps_latest.tar.gz',
         'GTDB/bac120.metadata.tsv',
         'GTDB/arc53.metadata.tsv',
