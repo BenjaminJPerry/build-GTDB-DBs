@@ -1,11 +1,11 @@
-!/bin/bash
-#SBATCH --job-name=Build-GTDB-Kraken2 # Job name
+#!/bin/bash
+#SBATCH --partition=inv-bigmem
+#SBATCH --job-name=Build-GTDB-Kraken2
 #SBATCH --account=perrybe # User account
 #SBATCH --nodes=1 # Nodes fo job              
 #SBATCH --cpus-per-task=64 #cpus for job
-#SBATCH --mem=1000000 # total memory for job
-#SBATCH --partition=inv-bigmem # parition to use
-#SBATCH --output=build-gtdb-kraken2-%j.log # slurm log file
+#SBATCH --mem=1000000 # total memory for jo
+#SBATCH --output=../build-gtdb-kraken2-%j.log # slurm log file
 #SBATCH --mail-type=ALL # Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-user=ben.perry@agresearch.co.nz # Where to send mail
 
