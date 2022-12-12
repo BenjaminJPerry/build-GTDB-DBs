@@ -1,0 +1,21 @@
+!/bin/bash
+#SBATCH --job-name=Build-GTDB-Kraken2 # Job name
+#SBATCH --account=perrybe # User account
+#SBATCH --nodes=1 # Nodes fo job              
+#SBATCH --cpus-per-task=64 #cpus for job
+#SBATCH --mem=1000000 # total memory for job
+#SBATCH --partition=inv-bigmem # parition to use
+#SBATCH --output=build-gtdb-kraken2-%j.log # slurm log file
+#SBATCH --mail-type=ALL # Mail events (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --mail-user=ben.perry@agresearch.co.nz # Where to send mail
+
+source activate kraken2
+
+cd /dataset/2022-BJP-GTDB_Benchmarking/scratch/build-GTDB-DBs/kraken/
+echo "Starting Kraken2-Build: $(date)"
+
+kraken2-build --build --threads 64 --db GTDB
+
+echo "Completed Kraken2-Build: $(date)"
+
+exit 0
