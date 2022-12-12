@@ -4,7 +4,7 @@
 #SBATCH --account=perrybe # User account
 #SBATCH --cpus-per-task=64 #cpus for job
 #SBATCH --mem=896G # total memory for jo
-#SBATCH --output=../build-gtdb-kraken2-%j.log # slurm log file
+#SBATCH --output=build-gtdb-kraken2-%j.log # slurm log file
 #SBATCH --mail-type=ALL # Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-user=ben.perry@agresearch.co.nz # Where to send mail
 

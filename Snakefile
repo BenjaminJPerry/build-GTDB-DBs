@@ -112,24 +112,6 @@ rule getUnirefMapping:
 
 
 
-rule getGTDBGenomes:
-    output:
-        gtdbTar='GTDB/gtdb_genomes_reps_latest.tar.gz'
-    conda:
-        'struo2'
-    message: 'Downloading GTDB release: '
-    threads: 2
-    resources:
-        time = lambda wildcards, attempt: attempt * 4320 # minutes
-    params:
-        gtdbGenomes=config['gtdb-genomes']
-    shell:
-        '''
-        wget -O {output.gtdbTar} {params.gtdbGenomes};
-        '''
-
-
-
 rule getGTDBBacMetadata:
     output:
         bac120Metadata='GTDB/bac120.metadata.tsv'
@@ -198,6 +180,80 @@ rule getGTDBArcTax:
 
 
 
+rule getGTDBGenomes:
+    output:
+        gtdbTar='GTDB/gtdb_genomes_reps_latest.tar.gz'
+    conda:
+        'struo2'
+    message: 'Downloading GTDB release: '
+    threads: 2
+    resources:
+        time = lambda wildcards, attempt: attempt * 4320 # minutes
+    params:
+        gtdbGenomes=config['gtdb-genomes']
+    shell:
+        '''
+        wget -O {output.gtdbTar} {params.gtdbGenomes};
+        '''
+
+
+
+rule prepGTDBGenomes:
+    input:
+        rules.getGTDBGenomes.ouput.gtdbTar
+    output:
+        directory('GTDB/genomes')
+    conda:
+        'struo2'
+    message: 'Preparing GTDB genomes...'
+    threads: 2
+    resources:
+        time = lambda wildcards, attempt: attempt * 24 * 60 # hours * minutes
+    shell:
+        '''
+        mkdir -p GTDB/gtdb_genomes_reps_latest;
+        mkdir -p GTDB/genomes;
+        find GTDB/gtdb_genomes_reps_latest -name "*.fna.gz" -exec mv -t GTDB/genomes/ {} +;
+        '''
+
+
+
+rule prepGTDBTaxonomy:
+    output:
+        taxonomy="GTDB/gtdbTaxonomy.tsv"
+    input:
+        bac=rules.getGTDBBacTax.output.bacTax,
+        arc=rules.getGTDBArcTax.output.arcTax
+    conda:
+        'struo2'
+    message: 'Merging taxonomy files...'
+    threads:2
+    shell:
+        '''
+        cat {input.bac} {input.arc} > {output.taxonomy}
+        '''
+
+
+
+rule prepKraken2Build:
+    output:
+        'krakenDB/',
+    input:
+        genomes=rules.prepGTDBGenomes.output,
+        taxonomy=rules.prepGTDBTaxonomy.output.taxonomy
+    conda:
+        'kraken2'
+    message: 'Preparing genomes for kraken2 build...'
+    threads: 2
+    script:
+        'scripts/tax_from_gtdb.py'
+    shell:
+        '''
+        {script} --gtdb {input.taxonomy} --assemblies {input.genomes} --nodes nodes.dmp --names names.dmp --kraken_dir kraken_genomes
+        '''
+
+
+
 rule taxdumpGTDB:
     input:
         bac = rules.getGTDBBacTax.output.bacTax,
@@ -217,23 +273,6 @@ rule taxdumpGTDB:
         taxonkit create-taxdump {input.bac} {input.arc} --gtdb --out-dir taxdump --force;
         '''
 
-
-
-rule prepGTDBGenomes:
-    output:
-        ''
-    conda:
-        'struo2'
-    message: 'Preparing GTDB genomes...'
-    threads: 2
-    resources:
-        time = lambda wildcards, attempt: attempt * 24 * 60 # hours * minutes
-    shell:
-        '''
-        mkdir -p GTDB/genomes
-
-        '''
-    
 # rule buildKCMP:
 
 # rule buildCentrifuge:
