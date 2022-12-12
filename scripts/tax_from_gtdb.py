@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+#source: https://github.com/rrwick/Metagenomics-Index-Correction#kraken2
 """
 This script will convert a GTDB taxonomy into the style of an NCBI taxonomy, appropriate for usage
 when building a Centrifuge or Kraken database.
