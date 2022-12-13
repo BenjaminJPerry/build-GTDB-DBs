@@ -167,8 +167,6 @@ rule makeMergedMetadata:
 
 
 
-
-
 rule getGTDBBacTax:
     output:
         bacTax='GTDB/bac120_taxonomy_latest.tsv'
