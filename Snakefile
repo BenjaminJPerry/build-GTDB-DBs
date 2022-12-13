@@ -26,7 +26,7 @@ rule targets:
     input:
         'Struo2-AgR-Tweaks/Snakefile',
         'GTDB/gtdb_genomes_reps_latest.tar.gz',
-        'GTDB/merged_metadata.tsv'
+        'GTDB/merged_metadata.tsv',
         'GTDB/bac120_taxonomy_latest.tsv',
         'GTDB/ar53_taxonomy_latest.tsv',
         'taxdump/taxid.map',
