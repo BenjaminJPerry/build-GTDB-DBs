@@ -9,6 +9,7 @@ cluster:
     --job-name=smk-{rule}-{wildcards}
     --time={resources.time}
     --output=logs/{rule}/{rule}-{wildcards}-%j.out
+    --verbose
 default-resources:
   - account=perrybe
   - partition=inv-iranui-fast,inv-iranui,inv-blade-g8-fast,inv-blade-g8,inv-bigmem-fast,inv-bigmem
