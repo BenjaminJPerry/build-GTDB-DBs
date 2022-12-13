@@ -26,8 +26,7 @@ rule targets:
     input:
         'Struo2-AgR-Tweaks/Snakefile',
         'GTDB/gtdb_genomes_reps_latest.tar.gz',
-        'GTDB/bac120.metadata.tsv',
-        'GTDB/arc53.metadata.tsv',
+        'GTDB/merged_metadata.tsv'
         'GTDB/bac120_taxonomy_latest.tsv',
         'GTDB/ar53_taxonomy_latest.tsv',
         'taxdump/taxid.map',
@@ -114,7 +113,7 @@ rule getUnirefMapping:
 
 rule getGTDBBacMetadata:
     output:
-        bac120Metadata='GTDB/bac120.metadata.tsv'
+        bac120Metadata='GTDB/bac120_metadata_latest.tsv'
     conda:
         'struo2'
     message: 'Downloading bac120_metadata_r207.tar.gz...'
@@ -123,26 +122,46 @@ rule getGTDBBacMetadata:
         bacMeta=config['gtdb-bac-metadata']
     shell:
         '''
-        wget -O GTDB/bac120_metadata_r207.tar.gz {params.bacMeta};
-        gunzip -c GTDB/bac120_metadata_r207.tar.gz > {output.bac120Metadata}
+        wget -O GTDB/bac120_metadata_latest.tar.gz {params.bacMeta};
+        tar -xf GTDB/bac120_metadata_latest.tar.gz -O > {output.bac120Metadata};
         '''
 
 
 
 rule getGTDBArcMetadata:
     output:
-        arc53Metadata='GTDB/arc53.metadata.tsv'
+        arc53Metadata='GTDB/ar53_metadata_latest.tsv'
     conda:
         'struo2'
     message: 'Downloading ar53_metadata_r207.tar.gz...'
-    threads:2
+    threads: 2
     params:
         arcMeta=config['gtdb-arc-metadata']
     shell:
         '''
-        wget -O GTDB/ar53_metadata_r207.tar.gz {params.arcMeta};
-        gunzip -c GTDB/ar53_metadata_r207.tar.gz > {output.arc53Metadata}
+        wget -O GTDB/ar53_metadata_latest.tar.gz {params.arcMeta};
+        tar -xf GTDB/ar53_metadata_latest.tar.gz -O > {ouput.arc53Metadata};
         '''
+
+
+
+rule makeMergedMetadata:
+    output:
+        metadata='GTDB/merged_metadata.tsv'
+    input:
+        bac120Metadata=rules.getGTDBBacMetadata.output.bac120Metadata,
+        arc53Metadata=rules.getGTDBArcMetadata.output.arc53Metadata
+    conda:
+        'struo2'
+    message: 'Merging metadata files...'
+    threads: 2
+    shell:
+        '''
+        cat {input.bac120Metadata} > {output.metadata};
+        cat {input.arc53Metadata} | grep -v "accession" >> {output.metadata};
+        '''
+
+
 
 
 
