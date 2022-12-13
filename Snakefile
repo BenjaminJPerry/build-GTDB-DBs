@@ -237,19 +237,18 @@ rule prepGTDBTaxonomy:
 
 rule prepKraken2Build:
     output:
-        'krakenDB/',
+        directory('GTDB/kraken_genomes')
     input:
         genomes=rules.prepGTDBGenomes.output,
-        taxonomy=rules.prepGTDBTaxonomy.output.taxonomy
+        taxonomy=rules.prepGTDBTaxonomy.output.taxonomy,
+        tax_from_gtdb='scripts/tax_from_gtdb.py'
     conda:
-        'kraken2'
+        'struo2'
     message: 'Preparing genomes for kraken2 build...'
     threads: 2
-    script:
-        'scripts/tax_from_gtdb.py'
     shell:
         '''
-        {script} --gtdb {input.taxonomy} --assemblies {input.genomes} --nodes nodes.dmp --names names.dmp --kraken_dir kraken_genomes
+        python {input.tax_from_gtdb} --gtdb {input.taxonomy} --assemblies {input.genomes} --nodes nodes.dmp --names names.dmp --kraken_dir GTDB/kraken_genomes
         '''
 
 
