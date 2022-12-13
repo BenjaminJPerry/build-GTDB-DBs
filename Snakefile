@@ -120,6 +120,8 @@ rule getGTDBBacMetadata:
     threads: 2
     params:
         bacMeta=config['gtdb-bac-metadata']
+    resources:
+        partition=inv-iranui-fast
     shell:
         '''
         wget -O GTDB/bac120_metadata_latest.tar.gz {params.bacMeta};
@@ -137,6 +139,8 @@ rule getGTDBArcMetadata:
     threads: 2
     params:
         arcMeta=config['gtdb-arc-metadata']
+    resources:
+        partition=inv-iranui-fast
     shell:
         '''
         wget -O GTDB/ar53_metadata_latest.tar.gz {params.arcMeta};
