@@ -140,7 +140,7 @@ rule getGTDBArcMetadata:
     shell:
         '''
         wget -O GTDB/ar53_metadata_latest.tar.gz {params.arcMeta};
-        tar -xf GTDB/ar53_metadata_latest.tar.gz -O > {ouput.arc53Metadata};
+        tar -xf GTDB/ar53_metadata_latest.tar.gz -O > {output.arc53Metadata};
         '''
 
 
