@@ -200,7 +200,7 @@ rule getGTDBGenomes:
 
 rule prepGTDBGenomes:
     input:
-        rules.getGTDBGenomes.ouput.gtdbTar
+        rules.getGTDBGenomes.output.gtdbTar
     output:
         directory('GTDB/genomes')
     conda:
