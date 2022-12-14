@@ -293,6 +293,12 @@ rule taxdumpGTDB:
         taxonkit create-taxdump {input.bac} {input.arc} --gtdb --out-dir taxdump --force;
         '''
 
+rule getStruo2Humann3DB:
+    shell:
+        '''
+        util_scripts/database_download.py -r 207 -d humann3 -t 4 humann3StruoDownload
+        '''
+        
 # rule buildKCMP:
 
 # rule buildCentrifuge:
