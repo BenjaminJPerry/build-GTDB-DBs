@@ -1,5 +1,5 @@
 # Copyright (c) 2022 Benjamin J Perry
-# Version: 1.0
+# Version: alpha
 # Maintainer: Benjamin J Perry
 # Email: ben.perry@agresearch.co.nz
 
